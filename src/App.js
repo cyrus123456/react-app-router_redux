@@ -11,6 +11,9 @@ import {
 
 
 function App(props) {
+  function addThing(){
+    alert('addThing')
+  }
   function parmsHome() {
     console.log('parmsHome', props)
     props.history.push(`/Home/777/776`)
@@ -27,10 +30,10 @@ function App(props) {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        {/* <p>
-          Edit <code>src/App.js</code> and save to reload.
+        <p>
+          总数：0
         </p>
-        <a
+        {/* <a
           className="App-link"
           href="https://reactjs.org"
           target="_blank"

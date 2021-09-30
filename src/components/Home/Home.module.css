@@ -1,0 +1,28 @@
+.reduxOperation {
+  padding: 5rem 0;
+  background-color: rgb(240, 240, 240);
+}
+
+.reduxOperationChildren {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  align-items: center;
+
+  margin: 0 auto;
+  width: 30vw;
+}
+
+.num{
+  display: flex;
+  align-items: center;
+}
+
+.reduxOperationChildren label {
+  /* font-size: larger; */
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.selectInput {
+  height: 1.3rem;
+}

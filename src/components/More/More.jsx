@@ -17,10 +17,10 @@ export default class More extends Component {
     }
     return (
       <div>
-        More
-        <div>
+        <h1>More页面</h1>
+        <h2>
           id={id},id2={id2}
-        </div>
+        </h2>
 
       </div>
     )
