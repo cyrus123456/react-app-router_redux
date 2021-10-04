@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import queryString from 'query-string';
 
-export default class More extends Component {
+export default class More extends PureComponent {
   render() {
     console.log('this.props.location.state :>> ', this.props.location.state);
     console.log('queryString.parse(this.props.location.search) :>> ', queryString.parse(this.props.location.search));

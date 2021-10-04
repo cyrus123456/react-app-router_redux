@@ -1,18 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
-import Home from './components/Home/Home.jsx';
-import More from './components/More/More.jsx';
 import {
   Route, withRouter,
   // NavLink,
   Switch, Redirect
 } from "react-router-dom";
+import { useState } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import Home from './components/Home/Home.jsx';
+import More from './components/More/More.jsx';
 
 
 
 function App(props) {
-  function addThing(){
-    alert('addThing')
+  const [count, setCount] = useState(0)
+  const [changeCount, setChangeCount] = useState('1')
+  function handleChangeCount(value) {
+    setChangeCount(value)
+  }
+
+  function add(value) {
+    setCount(count + parseInt(value))
+  }
+  function reduce(value) {
+    setCount(count - parseInt(value))
+  }
+  function oddAdd(value) {
+    if (count % 2 !== 0) {
+      setCount(count + parseInt(value))
+    }
+  }
+  function asyncAdd(value, timeout) {
+    setTimeout(() => {
+      setCount(count + parseInt(value))
+    }, timeout);
   }
   function parmsHome() {
     console.log('parmsHome', props)
@@ -31,7 +51,7 @@ function App(props) {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          总数：0
+          总数：{count} /redux:
         </p>
         {/* <a
           className="App-link"
@@ -56,7 +76,7 @@ function App(props) {
       <button onClick={() => seachMore(props)} >seach路由传参</button>
       <button onClick={() => stateMore(props)} >state路由传参</button> */}
       <Switch>
-        <Route path="/Home/:id/:id2" component={Home} />
+        <Route path="/Home/:id/:id2" component={(props) => <Home {...props} changeCount={changeCount} handleChangeCount={handleChangeCount} add={add} reduce={reduce} oddAdd={oddAdd} asyncAdd={asyncAdd} />} />
         <Route path="/More" component={More} />
         <Redirect to="/Home"></Redirect>
       </Switch>
