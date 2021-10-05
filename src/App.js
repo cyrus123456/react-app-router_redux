@@ -3,9 +3,11 @@ import {
   // NavLink,
   Switch, Redirect
 } from "react-router-dom";
-import store from "./redux/store";
+// import store from "./redux/store";
 import { addAcion, reduceAcion, oddAddAcion, asyncAddAcion, } from './redux/countAction'
 import { useState } from 'react';
+import { connect } from 'react-redux'
+
 import logo from './logo.svg';
 import './App.css';
 import Home from './components/Home/Home.jsx';
@@ -22,23 +24,27 @@ function App(props) {
 
   function add(value) {
     setCount(count + parseInt(value))
-    store.dispatch(addAcion(value))
+    // store.dispatch(addAcion(value))
+    props.addAcion(value)
   }
   function reduce(value) {
     setCount(count - parseInt(value))
-    store.dispatch(reduceAcion(value))
+    // store.dispatch(reduceAcion(value))
+    props.reduceAcion(value)
   }
   function oddAdd(value) {
     if (count % 2 !== 0) {
       setCount(count + parseInt(value))
-      store.dispatch(oddAddAcion(value))
+      // store.dispatch(oddAddAcion(value))
+      props.oddAddAcion(value)
     }
   }
   function asyncAdd(value, timeout) {
     setTimeout(() => {
       setCount(count + parseInt(value))
     }, timeout);
-    store.dispatch(asyncAddAcion(value, 1000))
+    // store.dispatch(asyncAddAcion(value, 1000))
+    props.asyncAddAcion(value, 1000)
   }
   function parmsHome() {
     console.log('parmsHome', props)
@@ -57,7 +63,8 @@ function App(props) {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          总数：{count} /redux:{store.getState()}
+          {/* 总数：{count} /redux:{store.getState()} */}
+          总数：{count} /redux:{props.reduxCount}
         </p>
         {/* <a
           className="App-link"
@@ -103,4 +110,13 @@ function App(props) {
 //   // arguments[0]
 // }
 
-export default withRouter(App);
+// export default withRouter(App);
+
+
+const mapStateToProps = (state) => ({
+  reduxCount: state
+})
+
+const mapDispatchToProps = { addAcion, reduceAcion, oddAddAcion, asyncAddAcion }
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App))
